@@ -1,37 +1,22 @@
 // Tests
+const express = require('express');
+const fastify = require('fastify')();
+const appExpress = express();
 
-const benchmark = require('benchmark');
-const suite = new benchmark.Suite;
+appExpress.get('/express', (req, res) => {
+    res.send('TEST 1 - EXPRESS')
+})
 
-function testArrowFunction() {
-    for (let i = 0; i < 1000000000; i++) {
-        let test = () => {}
-        test()
-    }
-}
+fastify.get('/fastify', (req, res) => {
+    res.send('TEST 2 - FASTIFY')
+})
 
-function testNormalFunction() {
-    for (let i = 0; i < 1000000000; i++) {
-        let test = function () {}
-        test()
-    }
-}
+appExpress.listen(3000, () => {
+    console.log('Express server listen on port 3000')
+})
 
-suite
-    .add('Arrow Function', () => {
-        testArrowFunction();
-    })
-    .add('Normal Function', () => {
-        testNormalFunction();
-    })
-    .on('cycle', event => {
-        console.log(String(event.target));
-    })
-    .on('complete', function () {
-        console.log('Fastest is ' + this.filter('fastest').map('name'));
-    })
-    .run({ 'async': true });
-
-
+fastify.listen(4000, () => {
+    console.log('Fastify listen on port 4000')
+})
 
 
