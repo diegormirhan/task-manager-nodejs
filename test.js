@@ -1,6 +1,5 @@
 // Tests
 const express = require('express');
-const fastify = require('fastify')();
 const appExpress = express();
 
 appExpress.get('/express', (req, res) => {
