@@ -1,4 +1,4 @@
-# Task Manager Project - Under Development
+# Task Manager Project
 
 ## **⚠️ Disclaimer:**
 
